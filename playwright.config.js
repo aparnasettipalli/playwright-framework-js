@@ -4,7 +4,7 @@ module.exports = defineConfig({
   testDir: './tests',
   timeout: 30000,
   use: {
-    headless: false,              
+    headless: true,              
     baseURL: 'https://www.saucedemo.com',
     viewport: { width: 1280, height: 720 },
     screenshot: 'on',
