@@ -1,17 +1,18 @@
 name: Playwright Tests
 
 on:
-  # Automatic runs on main branch only
-  push:
-    branches: [ main ]
-
-  # Manual runs on any branch
   workflow_dispatch:
+    inputs:
+      test:
+        description: 'Select which test to run'
+        required: true
+        default: 'all'
+        # options are for documentation purposes
+        type: string
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,7 +29,12 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --reporter=html
+        run: |
+          if [ "${{ github.event.inputs.test }}" == "all" ]; then
+            npx playwright test
+          else
+            npx playwright test tests/${{ github.event.inputs.test }}
+          fi
 
       - name: Upload Playwright Test Report
         uses: actions/upload-artifact@v4
