@@ -33,7 +33,7 @@ jobs:
           if [ "${{ github.event.inputs.test }}" == "all" ]; then
             npx playwright test
           else
-            npx playwright test tests/${{ github.event.inputs.test }}
+            npx playwright test --grep "$TEST"
           fi
 
       - name: Upload Playwright Test Report
