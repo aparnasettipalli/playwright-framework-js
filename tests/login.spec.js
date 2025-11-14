@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../pages/loginPage');
-const { validUser, invalidUser } = require('../utils/testData');
+const { validUser, lockedOutUser } = require('../utils/testData');
 
 test.describe('SauceDemo Login Tests', () => {
 
